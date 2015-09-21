@@ -96,7 +96,7 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
 
     $scope.post = function(r,c){
         if( !playerTurn ) return;
-
+        if( $scope.board[c][r] != nomove ) return;
 
         placeMove(r,c, 'X');
         playerTurn = false;

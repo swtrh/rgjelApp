@@ -4,11 +4,12 @@ var mongoClient = require('mongodb').MongoClient;
 var router = express.Router();
 
 router.get('/', function(req,res,next){
-    res.send('api');
+    res.send('here be api');
 });
 
+var mongoURL = 'mongodb://' +process.env.DBUSER +':' +process.env.DBPASSWORD +'@' + process.env.DBURL;
+
 var mon = function() {
-    var mongoURL = '...';
     mongoClient.connect(mongoURL, function(err, db){
         if( err ) console.log('errrrr', err );
 
