@@ -12,8 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var files = {
+    index: path.join(__dirname, '/public/', 'index.html')
+}
+
 app.get('/', function(req, res){
-    res.send('hello world');
+    res.sendFile(files.index);
 });
 
 var port = process.env.PORT || '3000';
