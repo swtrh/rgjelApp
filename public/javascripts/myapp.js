@@ -18,7 +18,7 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
     initBoard();
 
     var placeMove = function(r,c,p){
-        if( gameFinished )
+        if( gameFinished && !hasFreeSpaces() )
             return;
 
         if( !playerTurn && p == 'X') {
@@ -39,6 +39,17 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
         console.log(msg);
         gameFinished = true;
     };
+
+    var hasFreeSpaces = function() {
+        var nomove = '[]';
+        for( var y = 0; y < 3; y += 1 ){
+            for( var x = 0; x < 3; x += 1 ){
+                if( $scope.board[y][x] === nomove )
+                    return true;
+            }
+        }
+        return false;
+    }
 
     var checkBoard = function(){
         var xwin = 'XXX';
@@ -74,6 +85,10 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
             if( colStr === owin || rowStr === owin ){
                 setWinMessage('o won');
             }
+        }
+
+        if( !gameFinished && !hasFreeSpaces() ){
+            setWinMessage('none won');
         }
     };
 
