@@ -66,7 +66,7 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
             setWinMessage('X won');
         }
 
-        if( ldiag === xwin || ldiag === owin ){
+        if( ldiag === owin || ldiag === owin ){
             setWinMessage('O won');
         }
 

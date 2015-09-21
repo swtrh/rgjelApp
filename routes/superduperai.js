@@ -1,9 +1,35 @@
 var express = require('express');
+var mongoClient = require('mongodb').MongoClient;
+
 var router = express.Router();
 
 router.get('/', function(req,res,next){
     res.send('api');
 });
+
+
+var mon = function() {
+    var mongoURL = '...';
+    mongoClient.connect(mongoURL, function(err, db){
+        if( err ) console.log('errrrr', err );
+
+        console.log('connected to db');
+
+        db.collection('games').insertOne( {ins: 'abc'}, {w: 1}, function(err, doc){
+            if( err ){
+                console.log('error storing message in db: ', err );
+                db.close();
+            }
+            else{
+                db.close();
+                console.log('message stored');
+                res.send('message response');
+            }
+        });
+    });
+}
+
+
 
 router.route( '/move').post(function(req, res, next){
     var board = req.body.board;
