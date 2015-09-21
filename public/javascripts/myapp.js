@@ -83,7 +83,7 @@ myapp.controller('myappcontroller', ['$scope', '$http', function($scope, $http){
         if( !gameFinished ) {
             $http.post('/api/move', {board: $scope.board}).success(function(res){
                 playerTurn = true;
-                setInterval( function() {
+                setTimeout( function() {
                 placeMove(res.x, res.y, 'O');
                 }, 750);
             });
