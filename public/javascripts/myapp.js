@@ -37,6 +37,8 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
 
     var setWinMessage = function(msg) {
         console.log(msg);
+        var winMsgBox = document.getElementById('msgbox');
+        winMsgBox.innerHTML = '<h1 style="color:red">' + msg + '</h1>';
         gameFinished = true;
     };
 
@@ -63,11 +65,11 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
         }
 
         if( rdiag === xwin || ldiag === xwin ){
-            setWinMessage('X won');
+            setWinMessage('X Won');
         }
 
-        if( ldiag === owin || ldiag === owin ){
-            setWinMessage('O won');
+        if( rdiag === owin || ldiag === owin ){
+            setWinMessage('O Won');
         }
 
         for( var y = 0; y < 3; y += 1 ){
@@ -79,20 +81,23 @@ myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($sc
             }
 
             if( colStr === xwin || rowStr === xwin ){
-                setWinMessage('x won');
+                setWinMessage('X Won');
             }
 
             if( colStr === owin || rowStr === owin ){
-                setWinMessage('o won');
+                setWinMessage('O Won');
             }
         }
 
         if( !gameFinished && !hasFreeSpaces() ){
-            setWinMessage('none won');
+            setWinMessage('noone won :c');
         }
     };
 
     $scope.post = function(r,c){
+        if( !playerTurn ) return;
+
+
         placeMove(r,c, 'X');
         playerTurn = false;
 

@@ -7,7 +7,6 @@ router.get('/', function(req,res,next){
     res.send('api');
 });
 
-
 var mon = function() {
     var mongoURL = '...';
     mongoClient.connect(mongoURL, function(err, db){
@@ -28,8 +27,6 @@ var mon = function() {
         });
     });
 }
-
-
 
 router.route( '/move').post(function(req, res, next){
     var board = req.body.board;
