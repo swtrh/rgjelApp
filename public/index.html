@@ -12,7 +12,13 @@
         Hello {{place}}
 
         <div style="padding-top: 100px; padding-bottom: 50px">
-            Insert content
+            <table border="1" style="width:25%;" align="center">
+                <tr ng-repeat="r in [0,1,2]" >
+                    <td ng-repeat="c in [0,1,2]">
+                        <button style="width:100%;" ng-click="post(r,c)"> {{board[c][r]}} </button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
