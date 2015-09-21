@@ -1,6 +1,6 @@
 var myapp = angular.module('myapp', []);
 
-myapp.controller('myappcontroller', ['$scope', '$http', function($scope, $http){
+myapp.controller('myappcontroller', ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
     $scope.status = '[]';
     $scope.board = [];
     var playerTurn = true;
@@ -37,6 +37,7 @@ myapp.controller('myappcontroller', ['$scope', '$http', function($scope, $http){
 
     var setWinMessage = function(msg) {
         console.log(msg);
+        gameFinished = true;
     };
 
     var checkBoard = function(){
@@ -82,9 +83,9 @@ myapp.controller('myappcontroller', ['$scope', '$http', function($scope, $http){
 
         if( !gameFinished ) {
             $http.post('/api/move', {board: $scope.board}).success(function(res){
-                playerTurn = true;
-                setTimeout( function() {
-                placeMove(res.x, res.y, 'O');
+                $timeout( function() {
+                    playerTurn = true;
+                    placeMove(res.x, res.y, 'O');
                 }, 750);
             });
         }
